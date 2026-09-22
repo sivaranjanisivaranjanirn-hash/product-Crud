@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Main container */
+
+        .container {
+            width: 900px;
+            max-width: 100%;
+            margin: auto;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Heading */
+
+        h1 {
+            text-align: center;
+
+            font-size: 48px;
+
+            color: #172b6b;
+
+            margin-bottom: 10px;
+        }
+
+        .heading-line {
+            width: 120px;
+            height: 6px;
+
+            background: linear-gradient(
+                90deg,
+                #667eea,
+                #764ba2
+            );
+
+            border-radius: 10px;
+
+            margin: 0 auto 35px;
+        }
+
+        /* Input section */
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 17px 20px;
+
+            border: 2px solid #d5def5;
+
+            border-radius: 12px;
+
+            font-size: 18px;
+
+            outline: none;
+
+            color: #333;
+        }
+
+        input::placeholder {
+            color: #7183a3;
+        }
+
+        input:focus {
+            border-color: #667eea;
+
+            box-shadow:
+                0 0 8px rgba(102, 126, 234, 0.25);
+        }
+
+        /* Add button */
+
+        .add-btn {
+            width: 100%;
+
+            padding: 17px;
+
+            margin-top: 4px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                90deg,
+                #7648ed,
+                #5159ee
+            );
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(81, 89, 238, 0.3);
+        }
+
+        /* Task list */
+
+        ul {
+            list-style: none;
+
+            margin-top: 40px;
+        }
+
+        /* Task card */
+
+        li {
+            position: relative;
+
+            background: #f9fbff;
+
+            border-radius: 14px;
+
+            margin-bottom: 22px;
+
+            padding: 20px 20px 20px 35px;
+
+            min-height: 130px;
+
+            box-shadow:
+                0 5px 18px rgba(50, 70, 120, 0.10);
+
+            border: 1px solid #e0e7f5;
+
+            font-size: 18px;
+
+            line-height: 1.8;
+
+            color: #42577d;
+        }
+
+        /* Left blue line */
+
+        li::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 8px;
+
+            background: #4d5df5;
+
+            border-radius: 14px 0 0 14px;
+        }
+
+        /* Task text */
+
+        .task-text {
+            font-size: 21px;
+
+            font-weight: bold;
+
+            color: #172b6b;
+        }
+
+        /* Buttons */
+
+        .buttons {
+            margin-top: 10px;
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .buttons button {
+            border: none;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .buttons button:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.9;
+        }
+
+        /* Delete */
+
+        .delete-btn {
+            background: #ff3038;
+        }
+
+        /* Done */
+
+        .done-btn {
+            background: #18b76a;
+        }
+
+        /* Update */
+
+        .update-btn {
+            background: #f39a17;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 35px;
+            }
+
+            li {
+                padding-left: 25px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .buttons button {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>📋 Task Manager</h1>
+
+        <div class="heading-line"></div>
+
+
+        <!-- Input section -->
+
+        <div class="input-box">
+
+            <input
+                type="text"
+                id="task"
+                placeholder="☷  Enter Task"
+            >
+
+            <input
+                type="text"
+                id="task1"
+                placeholder="📄  Enter Task 1"
+            >
+
+            <input
+                type="text"
+                id="task2"
+                placeholder="▣  Enter Task 2"
+            >
+
+            <button
+                class="add-btn"
+                onclick="work()"
+            >
+                ＋ Add Task
+            </button>
+
+        </div>
+
+
+        <!-- Task list -->
+
+        <ul id="content"></ul>
+
+    </div>
+
+
+    <script>
+
+        function work() {
+
+            let a =
+                document.getElementById("task").value;
+
+            let b =
+                document.getElementById("task1").value;
+
+            let c =
+                document.getElementById("task2").value;
+
+            let d =
+                document.getElementById("content");
+
+
+            // Create new list item
+
+            let e =
+                document.createElement("li");
+
+
+            e.innerHTML =
+
+                "<div class='task-text'>" +
+                a +
+                "</div>" +
+
+                "<div>" +
+                b +
+                "</div>" +
+
+                "<div>" +
+                c +
+                "</div>" +
+
+                "<div class='buttons'>" +
+
+                "<button class='delete-btn' " +
+                "onclick='this.parentElement.parentElement.remove()'>" +
+                "🗑 Delete" +
+                "</button>" +
+
+                "<button class='done-btn' " +
+                "onclick='work1(this.parentElement.parentElement)'>" +
+                "✓ Done" +
+                "</button>" +
+
+                "<button class='update-btn' " +
+                "onclick='work2(this.parentElement.parentElement)'>" +
+                "✎ Update" +
+                "</button>" +
+
+                "</div>";
+
+
+            d.appendChild(e);
+
+
+            // Clear input boxes
+
+            document.getElementById("task").value = "";
+
+            document.getElementById("task1").value = "";
+
+            document.getElementById("task2").value = "";
+
+        }
+
+
+        /* Done button */
+
+        function work1(a) {
+
+            a.style.color = "red";
+
+            a.style.borderLeftColor = "red";
+        }
+
+
+        /* Update button */
+
+        function work2(a) {
+
+            let task =
+                prompt("Enter new task");
+
+            let task1 =
+                prompt("Enter new task1");
+
+            let task2 =
+                prompt("Enter new task2");
+
+
+            if (task !== null) {
+
+                a.querySelector(".task-text").textContent =
+                    task;
+
+            }
+
+
+            if (task1 !== null) {
+
+                a.querySelector("div:nth-child(2)").textContent =
+                    task1;
+
+            }
+
+
+            if (task2 !== null) {
+
+                a.querySelector("div:nth-child(3)").textContent =
+                    task2;
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
+
